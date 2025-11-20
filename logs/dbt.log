@@ -1,0 +1,52 @@
+[0m09:52:47.970610 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000027061873750>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002706190AD90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000027062C37F10>]}
+
+
+============================== 09:52:47.978254 | 9fc28a63-f75c-48bd-9b82-358f2a52af45 ==============================
+[0m09:52:47.978254 [info ] [MainThread]: Running with dbt=1.7.0
+[0m09:52:47.978254 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'no_print': 'None', 'use_colors': 'True', 'profiles_dir': 'C:\\Users\\BenoitOTTAVI\\.dbt', 'target_path': 'None', 'warn_error': 'None', 'static_parser': 'True', 'partial_parse': 'True', 'log_path': 'logs', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'indirect_selection': 'eager', 'version_check': 'True', 'use_experimental_parser': 'False', 'quiet': 'False', 'introspect': 'True', 'log_cache_events': 'False', 'debug': 'False', 'log_format': 'default', 'invocation_command': 'dbt init sqlauthority', 'printer_width': '80', 'write_json': 'True'}
+[0m09:52:47.980977 [debug] [MainThread]: Starter project path: C:\Users\BenoitOTTAVI\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\include\starter_project
+[0m09:52:48.043686 [info ] [MainThread]: 
+Your new dbt project "sqlauthority" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m09:52:48.043686 [info ] [MainThread]: Setting up your profile.
+[0m15:54:14.941837 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0B858AD10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0B8588B90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0B7F20350>]}
+
+
+============================== 15:54:14.941837 | deca3c9a-36d3-4328-8b59-311c51d75751 ==============================
+[0m15:54:14.941837 [info ] [MainThread]: Running with dbt=1.7.0
+[0m15:54:14.955254 [debug] [MainThread]: running dbt with arguments {'invocation_command': 'dbt init carved_rock_fitness', 'profiles_dir': 'C:\\Users\\BenoitOTTAVI\\.dbt', 'log_format': 'default', 'cache_selected_only': 'False', 'write_json': 'True', 'warn_error': 'None', 'log_path': 'logs', 'fail_fast': 'False', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'partial_parse': 'True', 'use_experimental_parser': 'False', 'version_check': 'True', 'quiet': 'False', 'introspect': 'True', 'log_cache_events': 'False', 'debug': 'False', 'no_print': 'None', 'use_colors': 'True', 'printer_width': '80', 'target_path': 'None'}
+[0m15:54:14.957262 [debug] [MainThread]: Starter project path: C:\Users\BenoitOTTAVI\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\include\starter_project
+[0m15:54:15.093166 [info ] [MainThread]: 
+Your new dbt project "carved_rock_fitness" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m15:54:15.108282 [info ] [MainThread]: Setting up your profile.
+[0m15:55:39.034226 [info ] [MainThread]: Profile carved_rock_fitness written to C:\Users\BenoitOTTAVI\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m15:55:39.042185 [debug] [MainThread]: Command `dbt init` succeeded at 15:55:39.042185 after 84.13 seconds
+[0m15:55:39.043843 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0B7F8B910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0B8255F50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0B0EBC790>]}
+[0m15:55:39.045178 [debug] [MainThread]: Flushing usage events

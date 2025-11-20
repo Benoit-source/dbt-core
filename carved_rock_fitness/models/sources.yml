@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: carved_rock_fitness
+    database: carved_rock_fitness  
+    schema: raw  
+    tables:
+      - name: billing_transactions
+      - name: cash_transactions
+      - name: customers
+      - name: enrollments
+      - name: locations
+      - name: products
