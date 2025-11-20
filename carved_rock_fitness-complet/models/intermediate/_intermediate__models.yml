@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: int_payments_unioned
+    description: |
+      A unified set of all payments made by customers.
+      Includes both cash and credit card transactions.
+
+      **Granularity:** One row per payment transaction.
