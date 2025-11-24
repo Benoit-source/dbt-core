@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: int_f_location
+    description: |
+      A unified set of all airbnb
+
+      **Granularity:** One row per airbnb.

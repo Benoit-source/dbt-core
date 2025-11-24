@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_airbnb__listing
+    description: '{{ doc("model_listing") }}'
+
+    columns:
+      - name: ville
+        description: La ville dans laquelle se situe le **airbnb**.
+      - name: id
+        tests:
+          - not_null
+          - unique
+  
+  - name: stg_airbnb__review
+    description: ...
+
+    columns:
+    - name: listing_id
+      tests:
+        - not_null
+        - relationships:
+            to: ref('stg_airbnb__listing')
+            field: id

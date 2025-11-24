@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: f_nb_location
+    config:
+      materialized: view
+    description: |
+      Nombre de location
