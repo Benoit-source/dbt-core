@@ -24,11 +24,11 @@ jobs:
           pip install dbt-core dbt-snowflake
 
       - name: Run dbt debug
-        run: dbt debug --profiles-dir ./profiles
+        run: dbt debug --profiles-dir ./profiles  --project-dir ./airbnb
 
       - name: Run dbt tests
-        run: dbt test --profiles-dir ./profiles --target dev
+        run: dbt test --profiles-dir ./profiles   --project-dir ./airbnb --target dev
 
       - name: Deploy to prod
         if: github.ref == 'refs/heads/main'
-        run: dbt run --profiles-dir ./profiles --target prod
+        run: dbt run --profiles-dir ./profiles   --project-dir ./airbnb --target prod
