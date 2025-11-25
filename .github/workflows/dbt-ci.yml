@@ -29,7 +29,7 @@ jobs:
         run: dbt test --profiles-dir ./.dbt   --project-dir ./airbnb --target dev || true
 
       - name: Generate dbt docs
-        run: dbt docs generate --profiles-dir ~/.dbt --project-dir ./airbnb
+        run: dbt docs generate --profiles-dir ./.dbt --project-dir ./airbnb
 
       - name: Deploy docs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
