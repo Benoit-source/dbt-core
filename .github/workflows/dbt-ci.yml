@@ -36,6 +36,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target
+          publish_branch: gh-pages
 
       - name: Deploy to prod
         if: github.ref == 'refs/heads/main'
