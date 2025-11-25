@@ -1,0 +1,34 @@
+name: dbt CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core dbt-snowflake
+
+      - name: Run dbt debug
+        run: dbt debug --profiles-dir ./profiles
+
+      - name: Run dbt tests
+        run: dbt test --profiles-dir ./profiles --target dev
+
+      - name: Deploy to prod
+        if: github.ref == 'refs/heads/main'
+        run: dbt run --profiles-dir ./profiles --target prod
