@@ -29,7 +29,7 @@ room as (
 
 agg as (
 
-    Select TR_PRICE, VILLE, ROOM_TYPE, Count(Distinct ID)
+    Select TR_PRICE, VILLE, ROOM_TYPE, Count(Distinct ID) NB_AIRBNB, Sum(NUMBER_OF_REVIEWS) NB_REVIEW
     From listing 
     Inner Join price On price.CODE_TR_PRICE = listing.code_price
     Inner Join town On town.CODE_VILLE = listing.code_ville
