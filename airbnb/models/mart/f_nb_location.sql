@@ -1,6 +1,6 @@
 with listing as (
 
-    select ID, CODE_PRICE, CODE_VILLE, CODE_ROOM_TYPE 
+    select ID, NUMBER_OF_REVIEWS, CODE_PRICE, CODE_VILLE, CODE_ROOM_TYPE 
     from {{ ref('int_f_location') }}
 
 ),
