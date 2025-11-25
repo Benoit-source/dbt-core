@@ -27,7 +27,7 @@ room as (
 
 ),
 
-agg as (
+aggregat as (
 
     Select TR_PRICE, VILLE, ROOM_TYPE, Count(Distinct ID) NB_AIRBNB, Sum(NUMBER_OF_REVIEWS) NB_REVIEW
     From listing 
@@ -39,4 +39,4 @@ agg as (
 )
 
 
-select * from agg
+select * from aggregat
