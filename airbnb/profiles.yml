@@ -21,39 +21,3 @@ airbnb:
       user: benoit
       warehouse: COMPUTE_WH
   target: dev
-carved_rock_fitness:
-  outputs:
-    dev:
-      account: pdvalbx-dyb27018
-      database: CARVED_ROCK_FITNESS
-      password: 'K?Ix,61Y~K1;O:'
-      role: PC_DBT_ROLE
-      schema: ANALYTICS
-      threads: 4
-      type: snowflake
-      user: benoit
-      warehouse: PC_DBT_WH
-  target: dev
-my_project:
-  outputs:
-    dev:
-      account: pdvalbx-dyb27018
-      database: PC_DBT_DB
-      password: 'K?Ix,61Y~K1;O:'
-      role: PC_DBT_ROLE
-      schema: PUBLIC
-      threads: 4
-      type: snowflake
-      user: benoit
-      warehouse: PC_DBT_WH
-  target: dev
-sqlauthority:
-  outputs:
-    dev:
-      password: 'K?Ix,61Y~K1;O:'
-      port: 3306
-      schema: sakila
-      server: 127.0.0.1
-      type: mysql
-      user: root
-  target: dev
