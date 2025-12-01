@@ -7,7 +7,7 @@ with airbnb_bordeaux as (
 
 airbnb_lyon as (
 
-    select * exclude(LIEN_URL), 'Lyon' VILLE, Decode (Rank() Over (Partition By ID Order BY DT_EVT Desc), 1 , 1, 0) As FG_DER_VER
+    select * exclude(LISTING_URL,LIEN_URL), 'Lyon' VILLE, Decode (Rank() Over (Partition By ID Order BY DT_EVT Desc), 1 , 1, 0) As FG_DER_VER
     from AIRBNB_BI_DEV.RAW_AIRBNB_LYON.AIRBNB_LISTING
 
 ),
