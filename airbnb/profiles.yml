@@ -5,7 +5,7 @@ airbnb:
       database: AIRBNB_BI_DEV
       password: 'K?Ix,61Y~K1;O:'
       role: ACCOUNTADMIN
-      schema: BI
+      schema: PUBLIC
       threads: 4
       type: snowflake
       user: benoit
@@ -15,7 +15,7 @@ airbnb:
       database: AIRBNB_BI
       password: 'K?Ix,61Y~K1;O:'
       role: ACCOUNTADMIN
-      schema: BI
+      schema: PUBLIC
       threads: 4
       type: snowflake
       user: benoit
