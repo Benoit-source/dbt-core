@@ -6,3 +6,9 @@ models:
       A unified set of all airbnb
 
       **Granularity:** One row per airbnb.
+    
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique

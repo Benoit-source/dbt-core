@@ -10,7 +10,6 @@ models:
       - name: id
         tests:
           - not_null
-          - unique
   
   - name: stg_airbnb__review
     description: ...
