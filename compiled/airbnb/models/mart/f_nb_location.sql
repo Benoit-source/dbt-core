@@ -1,7 +1,7 @@
 with listing as (
 
     select ID, NUMBER_OF_REVIEWS, CODE_PRICE, CODE_VILLE, CODE_ROOM_TYPE 
-    from AIRBNB_BI_DEV.PUBLIC_SILVER.int_f_location
+    from AIRBNB_BI_DEV.BI_SILVER.int_f_location
 
 ),
 
@@ -9,21 +9,21 @@ price as (
 
     Select CODE_TR_PRICE,
     TR_PRICE 
-    from AIRBNB_BI_DEV.PUBLIC_SILVER.int_d_price
+    from AIRBNB_BI_DEV.BI_SILVER.int_d_price
 
 ),
 
 town as (
 
     Select CODE_VILLE, VILLE 
-    from AIRBNB_BI_DEV.PUBLIC_SILVER.int_d_town
+    from AIRBNB_BI_DEV.BI_SILVER.int_d_town
 
 ),
 
 room as (
 
     Select CODE_ROOM_TYPE, ROOM_TYPE 
-    from AIRBNB_BI_DEV.PUBLIC_SILVER.int_d_type_room
+    from AIRBNB_BI_DEV.BI_SILVER.int_d_type_room
 
 ),
 

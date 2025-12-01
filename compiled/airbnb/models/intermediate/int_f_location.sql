@@ -14,7 +14,7 @@ with listing as (
 		REVIEW_SCORES_LOCATION,
 		REVIEW_SCORES_RATING,
 		REVIEW_SCORES_VALUE 
-	from AIRBNB_BI_DEV.PUBLIC_BRONZE.stg_airbnb__listing
+	from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
 	where FG_DER_VER = 1
 
 ),

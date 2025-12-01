@@ -4,7 +4,7 @@ with review as (
 	ID,
 	DATE,
 	COMMENTS 
-	from AIRBNB_BI_DEV.PUBLIC_BRONZE.stg_airbnb__review
+	from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__review
 	where FG_DER_VER = 1
 
 )
