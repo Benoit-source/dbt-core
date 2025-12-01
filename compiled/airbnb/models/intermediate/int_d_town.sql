@@ -1,6 +1,6 @@
 with listing as (
 
-    select Distinct VILLE from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+    select Distinct VILLE from AIRBNB_BI_DEV.PUBLIC_BRONZE.stg_airbnb__listing
 
 ),
 
