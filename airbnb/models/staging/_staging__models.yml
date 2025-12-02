@@ -6,7 +6,7 @@ models:
 
     columns:
       - name: ville
-        description: La ville dans laquelle se situe le **airbnb**.
+        description: La ville dans laquelle se situe le **Airbnb**.
       - name: id
         tests:
           - not_null
