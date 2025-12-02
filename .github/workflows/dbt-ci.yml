@@ -3,7 +3,7 @@ name: dbt CI - PR sur develop
 on:
   pull_request:
     branches:
-      - develop
+      - développement
  
 jobs:
   dbt:
