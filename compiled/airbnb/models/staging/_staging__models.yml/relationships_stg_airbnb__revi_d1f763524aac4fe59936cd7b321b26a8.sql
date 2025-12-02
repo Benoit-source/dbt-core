@@ -4,13 +4,13 @@
 
 with child as (
     select listing_id as from_field
-    from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__review
+    from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__review
     where listing_id is not null
 ),
 
 parent as (
     select id as to_field
-    from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+    from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__listing
 )
 
 select
