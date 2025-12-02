@@ -5,7 +5,7 @@ models:
     description: |
       A unified set of all airbnb
 
-      **Granularity:** One row per airbnb.
+      **Granularité:** Une ligne par airbnb.
     
     columns:
       - name: id
