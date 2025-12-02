@@ -10,7 +10,8 @@ models:
       - name: id
         tests:
           - not_null
-  
+          - accepted_values:
+            values: ['Bordeaux', 'Lyon', 'Paris', 'Pays Basque']
   - name: stg_airbnb__review
     description: ...
 
