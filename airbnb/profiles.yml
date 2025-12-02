@@ -1,5 +1,15 @@
 airbnb:
   outputs:
+    feature:
+      account: rjhnqbs-mob00712
+      database: AIRBNB_BI_FEATURE
+      password: 'K?Ix,61Y~K1;O:'
+      role: ACCOUNTADMIN
+      schema: BI
+      threads: 4
+      type: snowflake
+      user: benoit
+      warehouse: COMPUTE_WH
     dev:
       account: rjhnqbs-mob00712
       database: AIRBNB_BI_DEV
@@ -20,4 +30,4 @@ airbnb:
       type: snowflake
       user: benoit
       warehouse: COMPUTE_WH
-  target: dev
+  target: feature
