@@ -1,4 +1,11 @@
-with listing as (
+
+  create or replace   view AIRBNB_BI.BI_SILVER.int_f_location
+  
+  
+  
+  
+  as (
+    with listing as (
 
     select ID, 
 		PRICE,
@@ -54,3 +61,5 @@ liste as (
 )
 
 select * from liste
+  );
+

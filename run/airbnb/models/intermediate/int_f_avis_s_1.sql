@@ -1,4 +1,12 @@
 
+  
+    
+
+create or replace transient table AIRBNB_BI.BI_SILVER.int_f_avis_s_1
+    
+    
+    
+    as (
 
 with review_s_1 as (
 
@@ -50,3 +58,8 @@ avis_s_1 as (
 )
 
 select * from avis_s_1
+    )
+;
+
+
+  

@@ -1,4 +1,11 @@
-with listing as (
+
+  create or replace   view AIRBNB_BI.BI_SILVER.int_d_town
+  
+  
+  
+  
+  as (
+    with listing as (
 
     select Distinct VILLE from AIRBNB_BI.BI_BRONZE.stg_airbnb__listing
 
@@ -18,3 +25,5 @@ town as (
 )
 
 select * from town
+  );
+

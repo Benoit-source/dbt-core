@@ -1,4 +1,11 @@
-with listing as (
+
+  create or replace   view AIRBNB_BI.BI_SILVER.int_d_price
+  
+  
+  
+  
+  as (
+    with listing as (
 
     select Distinct PRICE from AIRBNB_BI.BI_BRONZE.stg_airbnb__listing
 
@@ -26,3 +33,5 @@ price as (
 )
 
 select * from price
+  );
+
