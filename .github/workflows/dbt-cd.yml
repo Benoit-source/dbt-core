@@ -1,9 +1,9 @@
-name: dbt CI - PR sur develop
+name: dbt CD
 
 on:
   pull_request:
     branches:
-      - develop
+      - main
  
 jobs:
   dbt:
@@ -22,8 +22,8 @@ jobs:
           pip install dbt-core dbt-snowflake
 
       - name: Run dbt debug
-        run: dbt debug --profiles-dir ./airbnb  --project-dir ./airbnb --target dev
+        run: dbt debug --profiles-dir ./airbnb  --project-dir ./airbnb --target prod
 
       - name: Run dbt tests
-        run: dbt test --profiles-dir ./airbnb  --project-dir ./airbnb --target dev || true
+        run: dbt test --profiles-dir ./airbnb  --project-dir ./airbnb --target prod || true
 

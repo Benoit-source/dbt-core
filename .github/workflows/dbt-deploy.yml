@@ -1,0 +1,37 @@
+name: dbt CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core dbt-snowflake
+
+      - name: Deploy to prod
+        if: github.ref == 'refs/heads/main'
+        run: dbt run --profiles-dir ./airbnb   --project-dir ./airbnb --target prod
+        
+      - name: Generate dbt docs
+        run: dbt docs generate --profiles-dir ./airbnb --project-dir ./airbnb --target prod
+
+      - name: Deploy docs to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./airbnb/target
+          publish_branch: gh-pages
+
