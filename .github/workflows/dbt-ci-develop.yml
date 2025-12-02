@@ -3,7 +3,7 @@ name: CI - Develop (Snowflake temp DB)
 on:
   push:
     branches:
-      - develop
+      - développement
 
 jobs:
   ci:

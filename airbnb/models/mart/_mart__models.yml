@@ -5,4 +5,4 @@ models:
     config:
       materialized: view
     description: |
-      Nombre de location
+      Nombre de locations par ville, prix et type de logement
