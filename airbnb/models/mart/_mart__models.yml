@@ -5,4 +5,4 @@ models:
     config:
       materialized: view
     description: |
-      Nombre de locations par ville, prix et type de logement
+      Nombre de locations par ville, prix et type de logement - Table agg
