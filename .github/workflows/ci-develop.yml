@@ -1,0 +1,69 @@
+name: CI - Develop (Snowflake temp DB)
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    env:
+      DBT_PROFILES_DIR: ./
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dbt-snowflake
+        run: pip install dbt-snowflake
+
+      - name: Create temporary Snowflake DB name
+        id: db-temp
+        run: |
+          DB_NAME="CI_${{ github.run_id }}_${{ github.ref_name }}"
+          echo "db_name=${DB_NAME//[^A-Za-z0-9_]/_}" >> $GITHUB_OUTPUT
+
+      - name: Create temporary database
+        run: |
+          snowsql -a ${{ secrets.SNOWFLAKE_ACCOUNT }} \
+                  -u ${{ secrets.SNOWFLAKE_USER }} \
+                  -p ${{ secrets.SNOWFLAKE_PASSWORD }} \
+                  -q "CREATE TRANSIENT DATABASE ${{ steps.db-temp.outputs.db_name }};"
+
+      - name: Create dbt profiles.yml
+        run: |
+          cat > profiles.yml <<EOF
+          airbnb:
+            target: ci
+            outputs:
+              ci:
+                type: snowflake
+                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+                user: ${{ secrets.SNOWFLAKE_USER }}
+                password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+                role: ${{ secrets.SNOWFLAKE_ROLE }}
+                warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+                database: ${{ steps.db-temp.outputs.db_name }}
+                schema: CI_${{ github.run_id }}
+          EOF
+
+      - name: Run dbt deps
+        run: dbt deps
+
+      - name: Run dbt build
+        run: dbt build --full-refresh --target = dev
+
+      - name: Drop temporary database
+        if: always()
+        run: |
+          snowsql -a ${{ secrets.SNOWFLAKE_ACCOUNT }} \
+                  -u ${{ secrets.SNOWFLAKE_USER }} \
+                  -p ${{ secrets.SNOWFLAKE_PASSWORD }} \
+                  -q "DROP DATABASE IF EXISTS ${{ steps.db-temp.outputs.db_name }};"

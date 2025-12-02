@@ -1,4 +1,4 @@
-name: dbt CD
+name: dbt Deploy PROD
 
 on:
   pull_request:
