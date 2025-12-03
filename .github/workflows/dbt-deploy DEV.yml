@@ -21,17 +21,7 @@ jobs:
         run: |
           pip install dbt-core dbt-snowflake
 
-      - name: Deploy to prod
+      - name: Deploy to DEV
         if: github.ref == 'refs/heads/main'
-        run: dbt run --profiles-dir ./airbnb   --project-dir ./airbnb --target dev
-        
-      - name: Generate dbt docs
-        run: dbt docs generate --profiles-dir ./airbnb --project-dir ./airbnb --dev prod
-
-      - name: Deploy docs to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./airbnb/target
-          publish_branch: gh-pages
+        run: dbt run --profiles-dir ./airbnb --project-dir ./airbnb --target dev
 
