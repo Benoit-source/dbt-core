@@ -1,8 +1,13 @@
-{% macro drop_schema(relation) %}
--- Supprime le schéma temporaire
-{% set sql %}
-  drop schema if exists {{ relation }} cascade
-{% endset %}
+{% macro drop_schemas_like(relation) %}
+{% set results = run_query("SHOW SCHEMAS LIKE '" ~ relation ~ "%' IN DATABASE {{ target.database }}") %}
 
-{% do run_query(sql) %}
+{% if results %}
+  {% for row in results.rows %}
+    {% set schema_name = row[1] %}
+    {% do run_query("DROP SCHEMA IF EXISTS " ~ schema_name ~ " CASCADE") %}
+    {{ log("Dropped schema: " ~ schema_name, info=True) }}
+  {% endfor %}
+{% else %}
+  {{ log("No schemas found with prefix: " ~ relation, info=True) }}
+{% endif %}
 {% endmacro %}
