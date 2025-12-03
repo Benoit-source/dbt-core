@@ -32,7 +32,8 @@ jobs:
 
       - name: Create profiles.yml
         run: |
-          cat > profiles.yml <<EOF
+          mkdir -p ./airbnb
+          cat <<EOF > ./airbnb/profiles.yml
           airbnb:
             target: ci
             outputs:
@@ -48,14 +49,14 @@ jobs:
           EOF
 
       - name: Install dependencies
-        run: dbt deps --project-dir ./airbnb --profiles-dir ./airbnb
+        run: dbt deps --project-dir ./airbnb --profiles-dir ./airbnb --target ci
 
       - name: Create temporary schema (via dbt macro)
         run: |
-          dbt run-operation create_schema --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
+          dbt run-operation create_schema --project-dir ./airbnb --profiles-dir ./airbnb --target ci --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
 
       - name: Run dbt build on temp schema
-        run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --full-refresh
+        run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target ci --full-refresh
 
       - name: Drop temporary schema (via dbt macro)
         if: always()
