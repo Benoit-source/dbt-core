@@ -1,4 +1,4 @@
-{% macro drop_schemas_like(relation) %}
+{% macro drop_schema_like(relation) %}
 {% set results = run_query("SHOW SCHEMAS LIKE '" ~ relation ~ "%' IN DATABASE {{ target.database }}") %}
 
 {% if results %}
