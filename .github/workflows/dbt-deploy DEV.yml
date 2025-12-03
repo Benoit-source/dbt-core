@@ -23,5 +23,5 @@ jobs:
 
       - name: Deploy to DEV
         if: github.ref == 'refs/heads/développement'
-        run: dbt run --profiles-dir ./airbnb --project-dir ./airbnb --target dev
+        run: dbt run --select state:modified+ --profiles-dir ./airbnb --project-dir ./airbnb --target dev
 
