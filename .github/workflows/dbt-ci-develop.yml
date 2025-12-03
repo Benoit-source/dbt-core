@@ -28,7 +28,6 @@ jobs:
         id: schema-temp
         run: |
           SCHEMA_NAME="CI_${{ github.run_id }}_${{ github.ref_name }}"
-          # Remplacer les caractères invalides par _
           SCHEMA_NAME="${SCHEMA_NAME//[^A-Za-z0-9_]/_}"
           echo "schema_name=${SCHEMA_NAME}" >> $GITHUB_OUTPUT
 
