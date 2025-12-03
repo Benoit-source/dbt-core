@@ -1,9 +1,9 @@
 name: CI - Develop (Snowflake temp DB)
 
 on:
-  push:
+  pull_request:
     branches:
-      - develop
+      - développement
 
 jobs:
   ci:
@@ -19,7 +19,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dbt-snowflake
         run: pip install dbt-snowflake
@@ -45,7 +45,7 @@ airbnb:
       warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
       database: ${{ steps.db-temp.outputs.db_name }}
       schema: CI_${{ github.run_id }}
-EOF
+        EOF
 
       - name: Create temporary database (via dbt)
         run: dbt run-operation create_db --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
