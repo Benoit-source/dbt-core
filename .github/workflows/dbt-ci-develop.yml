@@ -1,16 +1,16 @@
-name: CI - Develop (Snowflake temp DB)
+name: CI - Develop (Snowflake temp schema)
 
 on:
   pull_request:
     branches:
-      - développement
+      - develop
 
 jobs:
   ci:
     runs-on: ubuntu-latest
 
     env:
-      DBT_PROFILES_DIR: .
+      DBT_PROFILES_DIR: ./airbnb
 
     steps:
       - name: Checkout repo
@@ -28,37 +28,47 @@ jobs:
         id: schema-temp
         run: |
           SCHEMA_NAME="CI_${{ github.run_id }}_${{ github.ref_name }}"
-          echo "schema_name=${SCHEMA_NAME//[^A-Za-z0-9_]/_}" >> $GITHUB_OUTPUT
+          # Remplacer les caractères invalides par _
+          SCHEMA_NAME="${SCHEMA_NAME//[^A-Za-z0-9_]/_}"
+          echo "schema_name=${SCHEMA_NAME}" >> $GITHUB_OUTPUT
 
       - name: Create profiles.yml
         run: |
           mkdir -p ./airbnb
           cat <<EOF > ./airbnb/profiles.yml
-            airbnb:
-              target: ci
-              outputs:
-                ci:
-                  type: snowflake
-                  account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-                  user: ${{ secrets.SNOWFLAKE_USER }}
-                  password: ${{ secrets.SNOWFLAKE_PASSWORD }}
-                  role: ${{ secrets.SNOWFLAKE_ROLE }}
-                  warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-                  database: ${{ secrets.SNOWFLAKE_DATABASE_DEV }}
-                  schema: ${{ steps.schema-temp.outputs.schema_name }}
-          EOF
+airbnb:
+  target: ci
+  outputs:
+    ci:
+      type: snowflake
+      account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      user: ${{ secrets.SNOWFLAKE_USER }}
+      password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      role: ${{ secrets.SNOWFLAKE_ROLE }}
+      warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      database: ${{ secrets.SNOWFLAKE_DATABASE_DEV }}
+      schema: ${{ steps.schema-temp.outputs.schema_name }}
+EOF
 
-      - name: Install dependencies
-        run: dbt deps --project-dir ./airbnb --profiles-dir ./airbnb --target ci
+      - name: Verify dbt profile
+        run: dbt debug --project-dir ./airbnb --profiles-dir ./airbnb --target ci
 
-      - name: Create temporary schema (via dbt macro)
-        run: |
-          dbt run-operation create_schema --project-dir ./airbnb --profiles-dir ./airbnb --target ci --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
+      - name: Install dbt dependencies
+        run: dbt deps --project-dir ./airbnb --profiles-dir ./airbnb
+
+      - name: Create temporary schema
+        run: dbt run-operation create_schema \
+             --project-dir ./airbnb --profiles-dir ./airbnb --target ci \
+             --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
 
       - name: Run dbt build on temp schema
         run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target ci --full-refresh
 
-      - name: Drop temporary schema (via dbt macro)
+      - name: Run dbt tests
+        run: dbt test --project-dir ./airbnb --profiles-dir ./airbnb --target ci
+
+      - name: Drop temporary schema
         if: always()
-        run: |
-            dbt run-operation drop_schema --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
+        run: dbt run-operation drop_schema \
+             --project-dir ./airbnb --profiles-dir ./airbnb --target ci \
+             --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
