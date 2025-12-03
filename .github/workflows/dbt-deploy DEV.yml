@@ -35,10 +35,10 @@ jobs:
         run: |
           if [ -d "./airbnb/target" ] && [ -f "./airbnb/target/manifest.json" ]; then
               echo "Manifest exists, running state:modified+"
-              dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target ci --select state:modified+ --full-refresh
+              dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target dev --select state:modified+ --full-refresh
           else
               echo "No manifest, running full build"
-              dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target ci --full-refresh
+              dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target dev --full-refresh
           fi
 
       - name: Save dbt manifest cache
