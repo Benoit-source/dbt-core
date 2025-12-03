@@ -28,9 +28,22 @@ jobs:
           name: dbt-manifest-dev
           path: ./airbnb/target
 
-      - name: Deploy to DEV
-        if: github.ref == 'refs/heads/développement'
-        run: dbt run --profiles-dir ./airbnb --project-dir ./airbnb --target dev
+      - name: Check manifest
+        id: manifest-check
+        run: |
+          if [ -f "./prev_manifest/manifest.json" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build only changed models - Deploy to DEV
+        if: steps.manifest-check.outputs.exists == 'true' && github.ref == 'refs/heads/développement'
+        run: dbt build --profiles-dir ./airbnb --project-dir ./airbnb --target dev --select state:modified+ --state ./prev_manifest
+
+      - name: Build full project (no manifest available) - Deploy to DEV
+        if: steps.manifest-check.outputs.exists == 'false' && github.ref == 'refs/heads/développement'
+        run: dbt build --profiles-dir ./airbnb --project-dir ./airbnb --target dev --full-refresh
 
       - name: Upload current manifest
         uses: actions/upload-artifact@v4
