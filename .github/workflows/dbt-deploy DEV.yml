@@ -21,7 +21,18 @@ jobs:
         run: |
           pip install dbt-core dbt-snowflake
 
+      - name: Download previous manifest
+        uses: actions/download-artifact@v3
+        with:
+          name: dbt-manifest-dev
+          path: ./airbnb/target
+
       - name: Deploy to DEV
         if: github.ref == 'refs/heads/développement'
         run: dbt run --profiles-dir ./airbnb --project-dir ./airbnb --target dev
 
+      - name: Upload current manifest
+        uses: actions/upload-artifact@v3
+        with:
+          name: dbt-manifest-dev
+          path: ./airbnb/target/manifest.json
