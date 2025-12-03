@@ -23,6 +23,7 @@ jobs:
 
       - name: Download previous manifest
         uses: actions/download-artifact@v4
+        continue-on-error: true 
         with:
           name: dbt-manifest-dev
           path: ./airbnb/target
