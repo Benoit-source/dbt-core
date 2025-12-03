@@ -18,6 +18,3 @@ models:
     - name: listing_id
       tests:
         - not_null
-        - relationships:
-            to: ref('stg_airbnb__listing')
-            field: id

@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy to prod
         if: github.ref == 'refs/heads/main'
-        run: dbt run --select state:modified+ --profiles-dir ./airbnb   --project-dir ./airbnb --target prod
+        run: dbt run --profiles-dir ./airbnb   --project-dir ./airbnb --target prod
         
       - name: Generate dbt docs
         run: dbt docs generate --profiles-dir ./airbnb --project-dir ./airbnb --target prod
