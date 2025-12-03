@@ -19,7 +19,7 @@ jobs:
           git checkout ci-artifacts || git checkout -b ci-artifacts
           mkdir -p ./airbnb/prev_manifest
           if [ -f manifest.json ]; then
-            cp manifest.json ./prev_manifest/manifest.json
+            cp manifest.json ./airbnb/prev_manifest/manifest.json
           fi
 
       - name: Set up Python
