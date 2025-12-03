@@ -1,5 +1,5 @@
 
-  create or replace   view AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+  create or replace   view AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__listing
   
   
   
@@ -8,28 +8,28 @@
     with airbnb_bordeaux as (
 
     select * exclude(LISTING_URL), 'Bordeaux' VILLE, Decode (Rank() Over (Partition By ID Order BY DT_EVT Desc), 1 , 1, 0) As FG_DER_VER
-    from AIRBNB_BI_DEV.RAW_AIRBNB_BORDEAUX.DBO_LISTING
+    from AIRBNB_BI_FEATURE.RAW_AIRBNB_BORDEAUX.DBO_LISTING
 
 ),
 
 airbnb_lyon as (
 
     select * exclude(LISTING_URL,LIEN_URL), 'Lyon' VILLE, Decode (Rank() Over (Partition By ID Order BY DT_EVT Desc), 1 , 1, 0) As FG_DER_VER
-    from AIRBNB_BI_DEV.RAW_AIRBNB_LYON.AIRBNB_LISTING
+    from AIRBNB_BI_FEATURE.RAW_AIRBNB_LYON.AIRBNB_LISTING
 
 ),
 
 airbnb_paris as (
 
     select *, 'Paris' VILLE, Decode (Rank() Over (Partition By ID Order BY DT_EVT Desc), 1 , 1, 0) As FG_DER_VER
-    from AIRBNB_BI_DEV.RAW_AIRBNB_PARIS.AIRBNB_LISTING
+    from AIRBNB_BI_FEATURE.RAW_AIRBNB_PARIS.AIRBNB_LISTING
 
 ),
 
 airbnb_pays_basque as (
 
     select * exclude(LISTING_URL), 'Pays Basque' VILLE, Decode (Rank() Over (Partition By ID Order BY DT_EVT Desc), 1 , 1, 0) As FG_DER_VER
-    from AIRBNB_BI_DEV.RAW_AIRBNB_PAYS_BASQUE.AIRBNB_LISTING
+    from AIRBNB_BI_FEATURE.RAW_AIRBNB_PAYS_BASQUE.AIRBNB_LISTING
 
 ),
 

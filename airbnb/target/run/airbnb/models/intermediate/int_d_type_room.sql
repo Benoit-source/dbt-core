@@ -1,5 +1,5 @@
 
-  create or replace   view AIRBNB_BI_DEV.BI_SILVER.int_d_type_room
+  create or replace   view AIRBNB_BI_FEATURE.BI_SILVER.int_d_type_room
   
   
   
@@ -7,7 +7,7 @@
   as (
     with listing as (
 
-    select Distinct ROOM_TYPE from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+    select Distinct ROOM_TYPE from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__listing
 
 ),
 

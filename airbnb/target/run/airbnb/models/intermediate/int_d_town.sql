@@ -1,5 +1,5 @@
 
-  create or replace   view AIRBNB_BI_DEV.BI_SILVER.int_d_town
+  create or replace   view AIRBNB_BI_FEATURE.BI_SILVER.int_d_town
   
   
   
@@ -7,7 +7,7 @@
   as (
     with listing as (
 
-    select Distinct VILLE from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+    select Distinct VILLE from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__listing
 
 ),
 

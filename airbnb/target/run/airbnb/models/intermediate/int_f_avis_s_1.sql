@@ -2,7 +2,7 @@
   
     
 
-create or replace transient table AIRBNB_BI_DEV.BI_SILVER.int_f_avis_s_1
+create or replace transient table AIRBNB_BI_FEATURE.BI_SILVER.int_f_avis_s_1
     
     
     
@@ -10,7 +10,7 @@ create or replace transient table AIRBNB_BI_DEV.BI_SILVER.int_f_avis_s_1
 
 with review_s_1 as (
 
-    select * from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__review_S_1
+    select * from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__review_S_1
 
 ),
 
