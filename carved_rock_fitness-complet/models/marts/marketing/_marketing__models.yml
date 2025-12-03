@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: customers
+    description: |
+      Customer overview data mart.
+      This mart provides details about the memberships that each customer is enrolled in.
+      
+      **Granularity:** One row per customer enrollment.
+    columns:
+      - name: first_name
+        description: The customer's first name. **PII**
+      - name: last_name
+        description: The customer's last name. **PII**
+      - name: email_address
+        description: The customer's email address. **PII**
+      - name: date_of_birth
+        description: The customer's birth date. **PII**

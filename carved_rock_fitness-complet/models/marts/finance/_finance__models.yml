@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: revenue
+    config:
+      materialized: table
+    description: |
+      Revenue overview data mart.
+      This mart provides details about Carved Rock Fitness's revenue.
+      It is a unified set of all payments made by customers, and includes both cash and credit card transactions.
+      
+      **Granularity:** One row per payment transaction.

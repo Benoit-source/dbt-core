@@ -1,0 +1,13 @@
+carved_rock_fitness:
+  outputs:
+    dev:
+      account: pdvalbx-dyb27018
+      database: CARVED_ROCK_FITNESS
+      password: 'K?Ix,61Y~K1;O:'
+      role: PC_DBT_ROLE
+      schema: ANALYTICS
+      threads: 4
+      type: snowflake
+      user: benoit
+      warehouse: PC_DBT_WH
+  target: dev
