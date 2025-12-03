@@ -3,7 +3,7 @@ name: CI - Develop (Snowflake temp DB)
 on:
   push:
     branches:
-      - développement
+      - develop
 
 jobs:
   ci:
@@ -24,46 +24,38 @@ jobs:
       - name: Install dbt-snowflake
         run: pip install dbt-snowflake
 
-      - name: Create temporary Snowflake DB name
+      - name: Generate temporary DB name
         id: db-temp
         run: |
           DB_NAME="CI_${{ github.run_id }}_${{ github.ref_name }}"
           echo "db_name=${DB_NAME//[^A-Za-z0-9_]/_}" >> $GITHUB_OUTPUT
 
-      - name: Create temporary database
-        run: |
-          snowsql -a ${{ secrets.SNOWFLAKE_ACCOUNT }} \
-                  -u ${{ secrets.SNOWFLAKE_USER }} \
-                  -p ${{ secrets.SNOWFLAKE_PASSWORD }} \
-                  -q "CREATE TRANSIENT DATABASE ${{ steps.db-temp.outputs.db_name }};"
-
-      - name: Create dbt profiles.yml
+      - name: Create profiles.yml
         run: |
           cat > profiles.yml <<EOF
-          airbnb:
-            target: ci
-            outputs:
-              ci:
-                type: snowflake
-                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-                user: ${{ secrets.SNOWFLAKE_USER }}
-                password: ${{ secrets.SNOWFLAKE_PASSWORD }}
-                role: ${{ secrets.SNOWFLAKE_ROLE }}
-                warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-                database: ${{ steps.db-temp.outputs.db_name }}
-                schema: CI_${{ github.run_id }}
-          EOF
+airbnb:
+  target: ci
+  outputs:
+    ci:
+      type: snowflake
+      account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      user: ${{ secrets.SNOWFLAKE_USER }}
+      password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      role: ${{ secrets.SNOWFLAKE_ROLE }}
+      warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      database: ${{ steps.db-temp.outputs.db_name }}
+      schema: CI_${{ github.run_id }}
+EOF
 
-      - name: Run dbt deps
+      - name: Create temporary database (via dbt)
+        run: dbt run-operation create_db --args '{"db_name": "${{ steps.db-temp.outputs.db_name }}"}'
+
+      - name: Install dependencies
         run: dbt deps
 
-      - name: Run dbt build
-        run: dbt build --full-refresh --target = dev
+      - name: Run dbt build on temp DB
+        run: dbt build --full-refresh
 
       - name: Drop temporary database
         if: always()
-        run: |
-          snowsql -a ${{ secrets.SNOWFLAKE_ACCOUNT }} \
-                  -u ${{ secrets.SNOWFLAKE_USER }} \
-                  -p ${{ secrets.SNOWFLAKE_PASSWORD }} \
-                  -q "DROP DATABASE IF EXISTS ${{ steps.db-temp.outputs.db_name }};"
+        run: dbt run-operation drop_db --args '{"db_name": "${{ steps.db-temp.outputs.db_name }}"}'
