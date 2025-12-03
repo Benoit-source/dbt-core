@@ -22,6 +22,6 @@ jobs:
           pip install dbt-core dbt-snowflake
 
       - name: Deploy to DEV
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/développement'
         run: dbt run --profiles-dir ./airbnb --project-dir ./airbnb --target dev
 
