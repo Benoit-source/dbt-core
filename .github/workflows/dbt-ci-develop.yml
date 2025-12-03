@@ -49,7 +49,7 @@ jobs:
 
       - name: Create temporary database (via dbt)
         run: |
-          dbt run-operation create_db --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
+          dbt run-operation create_db --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
 
       - name: Install dependencies
         run: dbt deps
@@ -60,4 +60,4 @@ jobs:
       - name: Drop temporary database
         if: always()
         run: |
-            dbt run-operation drop_db --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
+            dbt run-operation drop_db --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
