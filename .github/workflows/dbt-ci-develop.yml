@@ -33,19 +33,19 @@ jobs:
       - name: Create profiles.yml
         run: |
           cat > profiles.yml <<EOF
-airbnb:
-  target: ci
-  outputs:
-    ci:
-      type: snowflake
-      account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      user: ${{ secrets.SNOWFLAKE_USER }}
-      password: ${{ secrets.SNOWFLAKE_PASSWORD }}
-      role: ${{ secrets.SNOWFLAKE_ROLE }}
-      warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-      database: ${{ steps.db-temp.outputs.db_name }}
-      schema: CI_${{ github.run_id }}
-        EOF
+          airbnb:
+            target: ci
+            outputs:
+              ci:
+                type: snowflake
+                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+                user: ${{ secrets.SNOWFLAKE_USER }}
+                password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+                role: ${{ secrets.SNOWFLAKE_ROLE }}
+                warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+                database: ${{ steps.db-temp.outputs.db_name }}
+                schema: CI_${{ github.run_id }}
+          EOF
 
       - name: Create temporary database (via dbt)
         run: dbt run-operation create_db --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
