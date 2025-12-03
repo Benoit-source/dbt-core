@@ -21,6 +21,14 @@ jobs:
         run: |
           pip install dbt-core dbt-snowflake
 
+      - name: Restore dbt manifest cache
+        uses: actions/cache@v3
+        with:
+          path: ./airbnb/target
+          key: dbt-manifest-${{ github.sha }}
+          restore-keys: |
+            dbt-manifest-
+
       - name: Deploy to DEV
         if: github.ref == 'refs/heads/développement'
         run: dbt run --select state:modified+ --profiles-dir ./airbnb --project-dir ./airbnb --target dev
