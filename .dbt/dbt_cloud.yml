@@ -1,0 +1,14 @@
+version: "1"
+context:
+  active-host: "jk304.us1.dbt.com"
+  active-project: "70471823517180"
+projects:
+  - project-name: "Partner Connect Trial"
+    project-id: "70471823517180"
+    account-name: "benoit"
+    account-id: "70471823502631"
+    account-host: "jk304.us1.dbt.com"
+    token-name: "cloud-cli-b271"
+    token-value: "dbtu_GZP0i3ITcN5hNRg7oghXUVHG61IIUY9TV6Lxotd21cdw0oEPo8"
+
+

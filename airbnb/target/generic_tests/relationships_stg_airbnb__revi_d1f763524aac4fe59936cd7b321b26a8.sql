@@ -1,0 +1,1 @@
+{{ test_relationships(column_name="listing_id", field="id", model=get_where_subquery(ref('stg_airbnb__review')), to=ref('stg_airbnb__listing')) }}

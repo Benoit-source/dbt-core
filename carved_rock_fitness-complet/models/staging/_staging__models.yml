@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_sap__customers__v2
+    description: '{{ doc("model_customers") }}'
+
+    columns:
+      - name: state
+        description: The state where the customer currently **lives**.
+  
+  - name: stg_sap__products
+    description: ...
