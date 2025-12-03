@@ -9,24 +9,27 @@ jobs:
   dbt:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Fetch manifest branch
+        run: |
+          git fetch origin ci-artifacts:ci-artifacts || git checkout --orphan ci-artifacts
+          git checkout ci-artifacts || git checkout -b ci-artifacts
+          mkdir -p ./prev_manifest
+          if [ -f manifest.json ]; then
+            cp manifest.json ./prev_manifest/manifest.json
+          fi
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dbt
         run: |
-          pip install dbt-core dbt-snowflake
-
-      - name: Download previous manifest
-        uses: actions/download-artifact@v4
-        continue-on-error: true 
-        with:
-          name: dbt-manifest-dev
-          path: ./airbnb/target
+          pip install dbt-snowflake
 
       - name: Check manifest
         id: manifest-check
@@ -45,8 +48,11 @@ jobs:
         if: steps.manifest-check.outputs.exists == 'false' && github.ref == 'refs/heads/développement'
         run: dbt build --profiles-dir ./airbnb --project-dir ./airbnb --target dev --full-refresh
 
-      - name: Upload current manifest
-        uses: actions/upload-artifact@v4
-        with:
-          name: dbt-manifest-dev
-          path: ./airbnb/target/manifest.json
+      - name: Save new manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp ./airbnb/target/manifest.json ./manifest.json
+          git add manifest.json
+          git commit -m "Update dbt manifest for run ${{ github.run_id }}" || echo "No changes to commit"
+          git push origin ci-artifacts

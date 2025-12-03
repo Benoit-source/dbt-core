@@ -1,6 +1,6 @@
 with listing as (
 
-    select Distinct PRICE from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+    select Distinct PRICE from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__listing
 
 ),
 

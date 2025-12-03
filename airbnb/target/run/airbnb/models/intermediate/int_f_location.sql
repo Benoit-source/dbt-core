@@ -1,5 +1,5 @@
 
-  create or replace   view AIRBNB_BI_DEV.BI_SILVER.int_f_location
+  create or replace   view AIRBNB_BI_FEATURE.BI_SILVER.int_f_location
   
   
   
@@ -21,7 +21,7 @@
 		REVIEW_SCORES_LOCATION,
 		REVIEW_SCORES_RATING,
 		REVIEW_SCORES_VALUE 
-	from AIRBNB_BI_DEV.BI_BRONZE.stg_airbnb__listing
+	from AIRBNB_BI_FEATURE.BI_BRONZE.stg_airbnb__listing
 	where FG_DER_VER = 1
 
 ),
