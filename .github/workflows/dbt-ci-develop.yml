@@ -53,7 +53,7 @@ jobs:
 
       - name: Create temporary schema (via dbt macro)
         run: |
-          dbt run-operation create_schema --project-dir ./airbnb --profiles-dir ./airbnb --target ci --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
+          dbt run-operation create_schema --project-dir ./airbnb --profiles-dir ./airbnb --target ci --args "{\"relation\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
 
       - name: Run dbt build on temp schema
         run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target ci --full-refresh
@@ -61,4 +61,4 @@ jobs:
       - name: Drop temporary schema (via dbt macro)
         if: always()
         run: |
-            dbt run-operation drop_schema --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"schema_name\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
+            dbt run-operation drop_schema --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"relation\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"

@@ -1,7 +1,7 @@
-{% macro drop_schema(schema_name) %}
+{% macro drop_schema(relation) %}
 -- Supprime le schéma temporaire
 {% set sql %}
-  drop schema if exists {{ schema_name }} cascade
+  drop schema if exists {{ relation }} cascade
 {% endset %}
 
 {% do run_query(sql) %}
