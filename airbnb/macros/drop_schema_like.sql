@@ -1,5 +1,5 @@
 {% macro drop_schema_like(prefix) %}
-{% set results = run_query("SHOW SCHEMAS LIKE '" ~ prefix ~ "%' IN DATABASE {{ target.database }}") %}
+{% set results = run_query("SHOW SCHEMAS LIKE '" ~ prefix ~ "%' IN DATABASE " ~ target.database) %}
 
 {% if results %}
   {% for row in results.rows %}
