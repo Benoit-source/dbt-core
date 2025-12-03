@@ -17,7 +17,7 @@ jobs:
         run: |
           git fetch origin ci-artifacts:ci-artifacts || git checkout --orphan ci-artifacts
           git checkout ci-artifacts || git checkout -b ci-artifacts
-          mkdir -p ./prev_manifest
+          mkdir -p ./airbnb/prev_manifest
           if [ -f manifest.json ]; then
             cp manifest.json ./prev_manifest/manifest.json
           fi
@@ -34,7 +34,7 @@ jobs:
       - name: Check manifest
         id: manifest-check
         run: |
-          if [ -f "./prev_manifest/manifest.json" ]; then
+          if [ -f "./airbnb/prev_manifest/manifest.json" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
           else
             echo "exists=false" >> $GITHUB_OUTPUT
