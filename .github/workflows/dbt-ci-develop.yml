@@ -1,7 +1,7 @@
 name: CI - Develop (Snowflake temp DB)
 
 on:
-  push:
+  pull_request:
     branches:
       - développement
 
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DBT_PROFILES_DIR: ./
+      DBT_PROFILES_DIR: .
 
     steps:
       - name: Checkout repo
@@ -19,51 +19,46 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dbt-snowflake
         run: pip install dbt-snowflake
 
-      - name: Create temporary Snowflake DB name
-        id: db-temp
+      - name: Génération du schéma temporaire
+        id: schema-temp
         run: |
-          DB_NAME="CI_${{ github.run_id }}_${{ github.ref_name }}"
-          echo "db_name=${DB_NAME//[^A-Za-z0-9_]/_}" >> $GITHUB_OUTPUT
+          SCHEMA_NAME="CI_${{ github.run_id }}_${{ github.ref_name }}"
+          echo "schema_name=${SCHEMA_NAME//[^A-Za-z0-9_]/_}" >> $GITHUB_OUTPUT
 
-      - name: Create temporary database
+      - name: Create profiles.yml
         run: |
-          snowsql -a ${{ secrets.SNOWFLAKE_ACCOUNT }} \
-                  -u ${{ secrets.SNOWFLAKE_USER }} \
-                  -p ${{ secrets.SNOWFLAKE_PASSWORD }} \
-                  -q "CREATE TRANSIENT DATABASE ${{ steps.db-temp.outputs.db_name }};"
-
-      - name: Create dbt profiles.yml
-        run: |
-          cat > profiles.yml <<EOF
-          airbnb:
-            target: ci
-            outputs:
-              ci:
-                type: snowflake
-                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-                user: ${{ secrets.SNOWFLAKE_USER }}
-                password: ${{ secrets.SNOWFLAKE_PASSWORD }}
-                role: ${{ secrets.SNOWFLAKE_ROLE }}
-                warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-                database: ${{ steps.db-temp.outputs.db_name }}
-                schema: CI_${{ github.run_id }}
+          mkdir -p ./airbnb
+          cat <<EOF > ./airbnb/profiles.yml
+            airbnb:
+              target: ci
+              outputs:
+                ci:
+                  type: snowflake
+                  account: "${{ secrets.SNOWFLAKE_ACCOUNT }}"
+                  user: "${{ secrets.SNOWFLAKE_USER }}"
+                  password: "${{ secrets.SNOWFLAKE_PASSWORD }}"
+                  role: "${{ secrets.SNOWFLAKE_ROLE }}"
+                  warehouse: "${{ secrets.SNOWFLAKE_WAREHOUSE }}"
+                  database: "${{ secrets.SNOWFLAKE_DATABASE_DEV }}"
+                  schema: "${{ steps.schema-temp.outputs.schema_name }}"
           EOF
 
-      - name: Run dbt deps
-        run: dbt deps
+      - name: Install dependencies
+        run: dbt deps --project-dir ./airbnb --profiles-dir ./airbnb --target ci
 
-      - name: Run dbt build
-        run: dbt build --full-refresh --target = dev
+      - name: Create temporary schema (via dbt macro)
+        run: |
+          dbt run-operation create_schema --project-dir ./airbnb --profiles-dir ./airbnb --target ci --args "{\"relation\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
 
-      - name: Drop temporary database
+      - name: Run dbt build on temp schema
+        run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target ci --full-refresh
+
+      - name: Drop temporary schema (via dbt macro)
         if: always()
         run: |
-          snowsql -a ${{ secrets.SNOWFLAKE_ACCOUNT }} \
-                  -u ${{ secrets.SNOWFLAKE_USER }} \
-                  -p ${{ secrets.SNOWFLAKE_PASSWORD }} \
-                  -q "DROP DATABASE IF EXISTS ${{ steps.db-temp.outputs.db_name }};"
+            dbt run-operation drop_schema_like --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"prefix\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
