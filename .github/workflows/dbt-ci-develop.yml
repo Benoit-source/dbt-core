@@ -55,7 +55,7 @@ jobs:
         run: dbt deps --project-dir ./airbnb --profiles-dir
 
       - name: Run dbt build on temp DB
-        run: dbt build --project-dir ./airbnb --profiles-dir --full-refresh
+        run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --full-refresh
 
       - name: Drop temporary database
         if: always()
