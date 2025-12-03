@@ -1,0 +1,70 @@
+==================== 2025-11-26 08:31:16.259424 | b06124ec-7aee-45aa-88eb-7bf032f8b8ad ====================
+08:31:16.259577 [info ]: Starting dbt LSP server
+08:31:16.259644 [info ]: Connecting to LSP client on port 8000
+08:31:16.276418 [info ]: Successfully connected to LSP client
+08:31:16.276458 [info ]: Creating LSP service...
+08:31:16.322127 [info ]: Creating LSP server...
+08:31:16.322263 [info ]: Starting LSP server...
+08:31:17.030473 [info ]: Cached model count updated: 10 models (estimate)
+08:31:17.630505 [error]: dbt0102: Deprecated test arguments: ["field", "to"] at top-level detected. Please migrate to the new format under the 'arguments' field: https://docs.getdbt.com/reference/deprecations#missingargumentspropertyingenerictestdeprecation.
+  --> models\staging\_staging__models.yml:24:20
+08:31:17.663395 [info ]: Cached model count updated: 10 models (accurate)
+08:31:18.327249 [info ]: Cached model count updated: 10 models (accurate)
+08:37:17.985257 [info ]: Cached model count updated: 10 models (estimate)
+08:37:18.036952 [error]: dbt0102: Deprecated test arguments: ["field", "to"] at top-level detected. Please migrate to the new format under the 'arguments' field: https://docs.getdbt.com/reference/deprecations#missingargumentspropertyingenerictestdeprecation.
+  --> models\staging\_staging__models.yml:24:20
+08:37:18.069837 [info ]: Cached model count updated: 10 models (accurate)
+08:37:18.074139 [debug]: Incremental compilation - 10 nodes selected: {"model.airbnb.f_nb_location", "model.airbnb.int_d_price", "model.airbnb.int_d_town", "model.airbnb.int_d_type_room", "model.airbnb.int_f_location", "model.airbnb.stg_airbnb__listing", "source.airbnb.AIRBNB_BORDEAUX.DBO_LISTING", "source.airbnb.AIRBNB_LYON.AIRBNB_LISTING", "source.airbnb.AIRBNB_PARIS.AIRBNB_LISTING", "source.airbnb.AIRBNB_PAYS_BASQUE.AIRBNB_LISTING"}
+==================== 2025-11-26 14:55:08.992440 | 5f814231-588c-47f9-9c87-b195c3bdcd73 ====================
+14:55:08.997506 [info ]: Starting dbt LSP server
+14:55:08.998419 [info ]: Connecting to LSP client on port 8000
+14:55:09.003689 [info ]: Successfully connected to LSP client
+14:55:09.003737 [info ]: Creating LSP service...
+14:55:09.150239 [info ]: Creating LSP server...
+14:55:09.150266 [info ]: Starting LSP server...
+==================== 2025-11-26 15:09:27.452424 | 33afd998-3a67-4eed-ab1e-1d640e1d94bc ====================
+15:09:27.452585 [info ]: Starting dbt LSP server
+15:09:27.452642 [info ]: Connecting to LSP client on port 8000
+15:09:27.456015 [info ]: Successfully connected to LSP client
+15:09:27.456051 [info ]: Creating LSP service...
+15:09:27.522267 [info ]: Creating LSP server...
+15:09:27.522332 [info ]: Starting LSP server...
+15:13:08.898781 [info ]: Cached model count updated: 10 models (estimate)
+15:13:09.618280 [error]: dbt0102: Deprecated test arguments: ["field", "to"] at top-level detected. Please migrate to the new format under the 'arguments' field: https://docs.getdbt.com/reference/deprecations#missingargumentspropertyingenerictestdeprecation.
+  --> models\staging\_staging__models.yml:24:20
+15:13:09.663886 [info ]: Cached model count updated: 10 models (accurate)
+15:13:10.711318 [info ]: Cached model count updated: 10 models (accurate)
+15:14:54.802806 [info ]: Cached model count updated: 10 models (estimate)
+15:14:54.807085 [info ]: Cached model count updated: 10 models (accurate)
+==================== 2025-11-27 12:06:49.706254 | 9b099e46-4573-4842-9cd9-53761cade68b ====================
+12:06:49.706404 [info ]: Starting dbt LSP server
+12:06:49.706450 [info ]: Connecting to LSP client on port 8000
+12:06:49.712639 [info ]: Successfully connected to LSP client
+12:06:49.712768 [info ]: Creating LSP service...
+12:06:49.819877 [info ]: Creating LSP server...
+12:06:49.819912 [info ]: Starting LSP server...
+==================== 2025-11-27 13:39:19.260047 | 7e48a12e-089a-4974-9468-4f5762720914 ====================
+13:39:19.260133 [info ]: Starting dbt LSP server
+13:39:19.260164 [info ]: Connecting to LSP client on port 8000
+13:39:19.263390 [info ]: Successfully connected to LSP client
+13:39:19.263443 [info ]: Creating LSP service...
+13:39:19.353609 [info ]: Creating LSP server...
+13:39:19.353685 [info ]: Starting LSP server...
+13:11:44.292124 [info ]: Cached model count updated: 10 models (estimate)
+13:11:44.964614 [error]: dbt0102: Deprecated test arguments: ["field", "to"] at top-level detected. Please migrate to the new format under the 'arguments' field: https://docs.getdbt.com/reference/deprecations#missingargumentspropertyingenerictestdeprecation.
+  --> models\staging\_staging__models.yml:24:20
+13:11:45.020243 [info ]: Cached model count updated: 10 models (accurate)
+==================== 2025-12-02 15:13:57.024916 | a45af493-c378-4557-8fbc-3d0a2f4da1ad ====================
+15:13:57.034592 [info ]: Starting dbt LSP server
+15:13:57.040006 [info ]: Connecting to LSP client on port 8000
+15:13:57.047875 [info ]: Successfully connected to LSP client
+15:13:57.047931 [info ]: Creating LSP service...
+15:13:57.257203 [info ]: Creating LSP server...
+15:13:57.257245 [info ]: Starting LSP server...
+==================== 2025-12-02 15:58:57.201169 | 936e253d-dd4a-468e-a010-ce4ab2b5fb95 ====================
+15:58:57.201298 [info ]: Starting dbt LSP server
+15:58:57.201328 [info ]: Connecting to LSP client on port 8000
+15:58:57.203430 [info ]: Successfully connected to LSP client
+15:58:57.203458 [info ]: Creating LSP service...
+15:58:57.253241 [info ]: Creating LSP server...
+15:58:57.253265 [info ]: Starting LSP server...
