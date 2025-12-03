@@ -21,30 +21,7 @@ jobs:
         run: |
           pip install dbt-core dbt-snowflake
 
-      - name: Restore dbt manifest cache
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: ./airbnb/target
-          key: dbt-manifest-${{ github.ref }}-${{ github.sha }}
-          restore-keys: |
-            dbt-manifest-${{ github.ref }}-
-
       - name: Deploy to DEV
-        if: github.ref == 'refs/heads/développement'        
-        run: |
-          if [ -d "./airbnb/target" ] && [ -f "./airbnb/target/manifest.json" ]; then
-              echo "Manifest exists, running state:modified+"
-              dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target dev --select state:modified+ --full-refresh
-          else
-              echo "No manifest, running full build"
-              dbt build --project-dir ./airbnb --profiles-dir ./airbnb --target dev --full-refresh
-          fi
+        if: github.ref == 'refs/heads/développement'
+        run: dbt run --profiles-dir ./airbnb --project-dir ./airbnb --target dev
 
-      - name: Save dbt manifest cache
-        if: always()
-        uses: actions/cache@v3
-        with:
-          path: ./airbnb/target
-          key: dbt-manifest-${{ github.ref }}-${{ github.sha }}
-          
