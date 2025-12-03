@@ -1,7 +1,7 @@
 airbnb:
   outputs:
     feature:
-      account: rjhnqbs-mob00712
+      account: zerzljf-agb83711
       database: AIRBNB_BI_FEATURE
       password: 'K?Ix,61Y~K1;O:'
       role: ACCOUNTADMIN
@@ -11,7 +11,7 @@ airbnb:
       user: benoit
       warehouse: COMPUTE_WH
     dev:
-      account: rjhnqbs-mob00712
+      account: zerzljf-agb83711
       database: AIRBNB_BI_DEV
       password: 'K?Ix,61Y~K1;O:'
       role: ACCOUNTADMIN
@@ -21,7 +21,7 @@ airbnb:
       user: benoit
       warehouse: COMPUTE_WH
     prod:
-      account: rjhnqbs-mob00712
+      account: zerzljf-agb83711
       database: AIRBNB_BI
       password: 'K?Ix,61Y~K1;O:'
       role: ACCOUNTADMIN
