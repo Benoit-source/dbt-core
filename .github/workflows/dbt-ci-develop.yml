@@ -61,4 +61,4 @@ jobs:
       - name: Drop temporary schema (via dbt macro)
         if: always()
         run: |
-            dbt run-operation drop_schema --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"relation\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
+            dbt run-operation drop_schema_like --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"relation\": \"${{ steps.schema-temp.outputs.schema_name }}\"}"
