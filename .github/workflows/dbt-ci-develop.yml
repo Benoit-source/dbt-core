@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DBT_PROFILES_DIR: .
+      DBT_PROFILES_DIR: ./airbnb
 
     steps:
       - name: Checkout repo
