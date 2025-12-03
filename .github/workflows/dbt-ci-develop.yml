@@ -52,7 +52,7 @@ jobs:
           dbt run-operation create_db --project-dir ./airbnb --profiles-dir ./airbnb --args "{\"db_name\": \"${{ steps.db-temp.outputs.db_name }}\"}"
 
       - name: Install dependencies
-        run: dbt deps --project-dir ./airbnb --profiles-dir
+        run: dbt deps --project-dir ./airbnb --profiles-dir ./airbnb
 
       - name: Run dbt build on temp DB
         run: dbt build --project-dir ./airbnb --profiles-dir ./airbnb --full-refresh
