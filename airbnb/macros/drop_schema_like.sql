@@ -1,5 +1,5 @@
-{% macro drop_schema_like(relation) %}
-{% set results = run_query("SHOW SCHEMAS LIKE '" ~ relation ~ "%' IN DATABASE {{ target.database }}") %}
+{% macro drop_schemas_like(prefix) %}
+{% set results = run_query("SHOW SCHEMAS LIKE '" ~ prefix ~ "%' IN DATABASE {{ target.database }}") %}
 
 {% if results %}
   {% for row in results.rows %}
@@ -8,6 +8,6 @@
     {{ log("Dropped schema: " ~ schema_name, info=True) }}
   {% endfor %}
 {% else %}
-  {{ log("No schemas found with prefix: " ~ relation, info=True) }}
+  {{ log("No schemas found with prefix: " ~ prefix, info=True) }}
 {% endif %}
 {% endmacro %}
